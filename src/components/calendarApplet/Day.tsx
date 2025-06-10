@@ -1,17 +1,23 @@
 "use client";
-import { useState, ReactElement } from "react";
+import { useState, ReactElement } from 'react';
+import AppletTile from '@components/shared/AppletTile';
 
-export type DayProps = {
+type DayProps = {
   date: Date;
+  className?: string;
 };
 
-export default function Day({ date }: DayProps): ReactElement {
+export default function Day({ date, className = "" }: DayProps): ReactElement {
   const [isFocused, setIsFocused] = useState(false);
   const dayNum = date.getDate();
+  // const className = isFocused ? "focused-day" : "unfocused-day";
 
-  if (isFocused) {
-    return <button className="unfocused-day">Day {dayNum}</button>;
-  } else {
-    return <button className="focused-day">Day {dayNum}</button>;
-  }
+  // TODO: Add tailwind css to this. Maybe create a tile applet component for things like small buttons (each day) or icons (colors of each cal)
+  return (
+    <AppletTile
+      className={className}
+      onClick={() => console.log(dayNum)}>
+      <div>{dayNum}</div>
+    </AppletTile>
+  );
 }

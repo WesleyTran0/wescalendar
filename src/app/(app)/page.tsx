@@ -8,7 +8,7 @@ import {
   getDayStart,
 } from "@wojtekmaj/date-utils";
 
-import Week from "@applet/Week";
+import Month from "@applet/Month";
 
 export default function Home() {
   const today = new Date();
@@ -31,7 +31,7 @@ export default function Home() {
           height={38}
           priority
         />
-        <Week date={today} weekStart={1} weekEnd={7} />
+        <Month numWeeks={4} />
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
