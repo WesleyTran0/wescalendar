@@ -8,7 +8,7 @@ import {
   getDayStart,
 } from "@wojtekmaj/date-utils";
 
-import NavBar from "@components/navbar/NavBar";
+import NavBar from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
