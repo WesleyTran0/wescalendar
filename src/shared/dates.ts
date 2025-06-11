@@ -19,6 +19,7 @@ console.log(new Date("06/01/2025").getDay());
 // Allows to get the day of the week idx
 // console.log("getMonth output: " + getMonthStart(test).getDay());
 
+// TODO: do this to be used in Month to create the weeks
 export function getCurWeekRange(date: Date): [Date, Date] { }
 
 // FIX: garbage function to be replaced with the one above lmao
