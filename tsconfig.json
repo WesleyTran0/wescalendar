@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@applet/*": ["./src/components/calendarApplet/*"]
+      "@applet/*": ["./src/components/navbar/calendarApplet/*"],
+      "@shared/*": ["./src/components/shared/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
