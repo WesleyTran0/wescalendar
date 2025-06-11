@@ -1,7 +1,12 @@
 "use client";
 import { ReactElement } from "react";
 import Week from "@/components/navbar/calendarApplet/Week";
-import { getNumWeeksInMonth } from "@/shared/dates";
+import {
+  getNumWeeksInMonth,
+  getViewWeekRange,
+  offsetDate,
+} from "@/shared/dates";
+import { getMonth } from "@wojtekmaj/date-utils";
 
 type MonthProps = {
   curMonth: number;
@@ -15,23 +20,24 @@ export default function Month({
   curYear,
   className = "",
 }: MonthProps): ReactElement {
-  const firstDayOfMonth: Date = new Date(`${curMonth}/01/${curYear}`);
-  const numWeeks = getNumWeeksInMonth(firstDayOfMonth);
+  let curBaseDay: Date = new Date(`${curMonth}/01/${curYear}`);
+  const numWeeks = getNumWeeksInMonth(curBaseDay);
 
   const weeksInMonth = Array.from({ length: numWeeks }, (_, i) => {
-    // TODO: DO
-    // const startDateOfCurWeek =
-    const startOfCurWeek: number = i * 7 + 1;
-    const endOfCurWeek: number = startOfCurWeek + 7;
+    const [startOfCurWeek, endOfCurWeek] = getViewWeekRange(curBaseDay);
+    const date =
+      getMonth(startOfCurWeek) != getMonth(curBaseDay)
+        ? curBaseDay
+        : startOfCurWeek;
 
+    curBaseDay = offsetDate(curBaseDay, 7);
     return { startOfCurWeek, endOfCurWeek, date };
   });
-
   return (
     <div className={`${className}`}>
       {weeksInMonth.map(({ startOfCurWeek, endOfCurWeek, date }) => (
         <Week
-          key={date.toISOString()}
+          key={Math.random().toString().concat("_week")}
           date={date}
           weekStart={startOfCurWeek}
           weekEnd={endOfCurWeek}

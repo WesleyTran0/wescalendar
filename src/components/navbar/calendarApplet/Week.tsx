@@ -4,13 +4,14 @@ import { useState, ReactElement } from "react";
 // import { getMonthRange } from "@wojtekmaj/date-utils";
 
 import Day from "@applet/Day";
+import { offsetDate } from "@/shared/dates";
 
 const WEEK_LEN: number = 7;
 
 type WeekProps = {
   date: Date;
-  weekStart: number;
-  weekEnd: number;
+  weekStart: Date;
+  weekEnd: Date;
 };
 
 export default function Week({
@@ -22,16 +23,15 @@ export default function Week({
 
   const className = isFocused ? "focused_week" : "unfocused_week";
 
-  const daysInWeek = Array.from({ length: weekEnd - weekStart }, (_, i) => {
-    const day = new Date(weekStart);
-    day.setDate(weekStart + i);
-    return day;
+  const daysInWeek = Array.from({ length: 7 }, (_, i) => {
+    let curDay = offsetDate(weekStart, i);
+    return curDay;
   });
 
   return (
     <div className={`flex ${className}`}>
       {daysInWeek.map((day) => (
-        <Day key={day.toISOString()} date={day} />
+        <Day key={Math.random().toString()} date={day} />
       ))}
     </div>
   );

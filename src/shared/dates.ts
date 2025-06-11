@@ -14,29 +14,52 @@ import {
   getDayRange,
 } from "@wojtekmaj/date-utils";
 
-const test = new Date("04/02/2025");
-console.log(new Date("06/01/2025").getDay());
-// Allows to get the day of the week idx
-// console.log("getMonth output: " + getMonthStart(test).getDay());
-
 // TODO: do this to be used in Month to create the weeks
-export function getCurWeekRange(date: Date): [Date, Date] { }
+export function getViewWeekRange(date: Date): [Date, Date] {
+  const startDate: Date = getStartOfViewWeek(date);
+  const endDate: Date = getEndOfViewWeek(date);
 
-// FIX: garbage function to be replaced with the one above lmao
-export function getStartOfViewWeek(date: Date): Date {
-  const weekDate = date.getDay();
-  if (weekDate == 0) {
-    return new Date(date);
-  }
-
-  const prevMonthEnd = getPreviousMonthEnd(date).getDate();
-  return new Date(date.setDate(prevMonthEnd - weekDate + 1));
+  return [startDate, endDate];
 }
 
-export function getNumWeeksInMonth(date: Date): number {
-  const startOfMonth = getMonthStart(date);
-  const satOfWeekOne = 7 - startOfMonth.getDay();
-  const endOfMonth = getMonthEnd(date).getDate();
+/** Returns the first date of viewing week that the given Date is in. */
+function getStartOfViewWeek(date: Date): Date {
+  if (date.getDate() != 1 && date.getDate() < 7) {
+    const prevMonthEnd = getPreviousMonthEnd(date);
+    return offsetDate(prevMonthEnd, -prevMonthEnd.getDay());
+  } else {
+    return offsetDate(date, -date.getDay());
+  }
+}
 
-  return Math.ceil((endOfMonth - satOfWeekOne) / 7);
+/** Returns the last date of the viewing week that the given Date is in. */
+function getEndOfViewWeek(date: Date): Date {
+  const monthEnd = getMonthEnd(date).getDate();
+
+  if (date.getDate() + 7 > monthEnd) {
+    const nextMonthStart = getNextMonthStart(date);
+    return offsetDate(nextMonthStart, 7 - 1 - nextMonthStart.getDay());
+  }
+
+  return offsetDate(date, 7 - 1 - date.getDay());
+}
+
+/** Returns the number of weeks in month of the given Date */
+export function getNumWeeksInMonth(date: Date): number {
+  const firstSatOfMonthDate: number = offsetDate(
+    date,
+    7 - 1 - date.getDay(),
+  ).getDate();
+  const endOfMonth = getMonthEnd(date).getDate();
+  let numWeeks = 1;
+
+  numWeeks = numWeeks + Math.ceil((endOfMonth - firstSatOfMonthDate) / 7);
+  return numWeeks;
+}
+
+/** Returns a the date that is dayOffset away from the given date*/
+export function offsetDate(date: Date, dayOffset: number): Date {
+  const copyDate = new Date(date);
+  copyDate.setDate(copyDate.getDate() + dayOffset);
+  return copyDate;
 }
