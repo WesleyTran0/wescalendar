@@ -20,7 +20,7 @@ export default function Day({ date }: DayProps): ReactElement {
               disabled:opacity-50 disabled:cursor-not-allowed`"
       onClick={() => console.log(dayNum)}
     >
-      <div>{dayNum}</div>
+      <div className="font-calendar text-sm tabular-nums">{dayNum}</div>
     </AppletTile>
   );
 }

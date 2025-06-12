@@ -31,7 +31,7 @@ export default function Week({
   return (
     <div className={`flex ${className}`}>
       {daysInWeek.map((day) => (
-        <Day key={Math.random().toString()} date={day} />
+        <Day key={day.toISOString()} date={day} />
       ))}
     </div>
   );

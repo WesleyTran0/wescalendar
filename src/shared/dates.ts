@@ -14,6 +14,7 @@ import {
   getDayRange,
 } from "@wojtekmaj/date-utils";
 
+/** Maps Month Index to Month name. Uses 0-indexing where month 0 is January*/
 export const MONTHS = [
   "January",
   "February",
@@ -29,6 +30,7 @@ export const MONTHS = [
   "December",
 ];
 
+/** Maps Month Index to shortened Month name. Uses 0-indexing where month 0 is January*/
 export const MONTHS_SHORT = [
   "Jan",
   "Feb",

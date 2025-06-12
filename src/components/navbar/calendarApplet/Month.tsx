@@ -15,6 +15,9 @@ type MonthProps = {
   // what day of the week start
 };
 
+/*
+ * Creates a Month using the current Month and Year. The month should be 1 indexed
+ */
 export default function Month({
   curMonth,
   curYear,
@@ -33,11 +36,12 @@ export default function Month({
     curBaseDay = offsetDate(curBaseDay, 7);
     return { startOfCurWeek, endOfCurWeek, date };
   });
+
   return (
     <div className={`${className}`}>
       {weeksInMonth.map(({ startOfCurWeek, endOfCurWeek, date }) => (
         <Week
-          key={Math.random().toString().concat("_week")}
+          key={startOfCurWeek.toISOString()}
           date={date}
           weekStart={startOfCurWeek}
           weekEnd={endOfCurWeek}

@@ -1,23 +1,26 @@
 "use client";
 
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import Image from "next/image";
 import Month from "./Month";
-import { MONTHS, MONTHS_SHORT } from "@/shared/dates";
-import { getMonth, getYear } from "@wojtekmaj/date-utils";
-import ArrowIcon from "@public/arrow.svg";
+import { MONTHS, MONTHS_SHORT, offsetDate } from "@/shared/dates";
+import {
+  getMonth as getMonthIdx,
+  getMonthHuman,
+  getYear,
+} from "@wojtekmaj/date-utils";
 
 type CalendarProps = {};
 
-export default function Cajendar({}: CalendarProps): ReactElement {
-  // error with perfect 28 / 7 = 4 division
-  const today = new Date();
+export default function Calendar({ }: CalendarProps): ReactElement {
+  const curDate = new Date();
+  const [viewingDate, setViewingDate] = useState(new Date());
 
   return (
     <div>
       <div className="flex w-full">
-        <div className="w-6/10 py-0.5 rounded-lg text-left">
-          {MONTHS[getMonth(today)]}
+        <div className="w-6/10 py-0.5 rounded-lg text-left tabular-nums text-md font-calendar text-sm">
+          {`${MONTHS[getMonthIdx(viewingDate)]}  ${viewingDate.getFullYear()}`}
         </div>
         <div className="w-4/10 py-0.5 round-lg flex justify-end text-right items-right space-x-1 p-0.5">
           <Image
@@ -26,6 +29,15 @@ export default function Cajendar({}: CalendarProps): ReactElement {
             alt="Previous Month"
             width={20}
             height={20}
+            onClick={() => {
+              setViewingDate(
+                new Date(
+                  viewingDate.getFullYear(),
+                  viewingDate.getMonth() - 1,
+                  viewingDate.getDate(),
+                ),
+              );
+            }}
           />
           <Image
             className="fill-gray-300"
@@ -33,10 +45,22 @@ export default function Cajendar({}: CalendarProps): ReactElement {
             alt="Next Month"
             width={20}
             height={20}
+            onClick={() => {
+              setViewingDate(
+                new Date(
+                  viewingDate.getFullYear(),
+                  viewingDate.getMonth() + 1,
+                  viewingDate.getDate(),
+                ),
+              );
+            }}
           />
         </div>
       </div>
-      <Month curMonth={getMonth(today)} curYear={getYear(today)} />
+      <Month
+        curMonth={getMonthHuman(viewingDate)}
+        curYear={getYear(viewingDate)}
+      />
     </div>
   );
 }
