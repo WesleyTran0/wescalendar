@@ -13,13 +13,13 @@ import {
 type CalendarProps = {};
 
 export default function Calendar({ }: CalendarProps): ReactElement {
-  const curDate = new Date();
+  const [focusedDate, setFocusedDate] = useState(new Date());
   const [viewingDate, setViewingDate] = useState(new Date());
 
   return (
-    <div>
+    <div className="text-standard-text tabular-nums font-calendar text-sm">
       <div className="flex w-full">
-        <div className="w-6/10 py-0.5 rounded-lg text-left tabular-nums text-md font-calendar text-sm">
+        <div className="w-6/10 py-0.5 rounded-lg text-left">
           {`${MONTHS[getMonthIdx(viewingDate)]}  ${viewingDate.getFullYear()}`}
         </div>
         <div className="w-4/10 py-0.5 round-lg flex justify-end text-right items-right space-x-1 p-0.5">
@@ -58,6 +58,8 @@ export default function Calendar({ }: CalendarProps): ReactElement {
         </div>
       </div>
       <Month
+        // TODO: Add the highlighting and determine how you want to pass donw that information. Through context or parameter?
+        // focusedDate={focusedDate}
         curMonth={getMonthHuman(viewingDate)}
         curYear={getYear(viewingDate)}
       />

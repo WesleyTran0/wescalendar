@@ -9,6 +9,7 @@ import {
 import { getMonth } from "@wojtekmaj/date-utils";
 
 type MonthProps = {
+  // focusedDate: Date;
   curMonth: number;
   curYear: number;
   className?: string;
@@ -19,12 +20,14 @@ type MonthProps = {
  * Creates a Month using the current Month and Year. The month should be 1 indexed
  */
 export default function Month({
+  // focusedDate,
   curMonth,
   curYear,
   className = "",
 }: MonthProps): ReactElement {
   let curBaseDay: Date = new Date(`${curMonth}/01/${curYear}`);
   const numWeeks = getNumWeeksInMonth(curBaseDay);
+  // const [focusedDate, setFocusedDate] = useContext
 
   const weeksInMonth = Array.from({ length: numWeeks }, (_, i) => {
     const [startOfCurWeek, endOfCurWeek] = getViewWeekRange(curBaseDay);
