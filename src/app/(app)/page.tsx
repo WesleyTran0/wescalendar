@@ -18,7 +18,7 @@ export default function Home() {
     <div className="flex h-screen">
       <CalendarContext>
         <NavBar />
-        <Calendar className="flex-1 overflow-auto px-1" />
+        <Calendar className="flex-1 overflow-auto" />
         <DetailsBar />
       </CalendarContext>
     </div>

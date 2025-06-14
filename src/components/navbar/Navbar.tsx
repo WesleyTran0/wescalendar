@@ -6,7 +6,7 @@ type NavbarProps = {};
 
 export default function Navbar({ }: NavbarProps): ReactElement {
   return (
-    <Sidebar>
+    <Sidebar className="border-r border-bg-highlight">
       <CalendarApplet />
     </Sidebar>
   );

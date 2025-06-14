@@ -26,8 +26,8 @@ export default function CalendarHeader({ }: CalenderHeader) {
   }
 
   return (
-    <div className="w-full h-20 text-standard-text">
-      <div className="text-2xl font-semibold flex flex-col justify-end">
+    <div className="w-full h-18 text-standard-text flex flex-col justify-end border-b border-bg-highlight">
+      <div className="py-1 px-2 text-xl font-semibold flex flex-col justify-end">
         {monthName} {curYear}
       </div>
       {/* TODO: Add Month buttons to change forward and backward months */}

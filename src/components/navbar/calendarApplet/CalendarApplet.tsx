@@ -17,7 +17,7 @@ export default function CalendarApplet({ }: CalendarAppletProps): ReactElement {
   const [viewingDate, setViewingDate] = useState(new Date());
 
   return (
-    <div className="text-standard-text tabular-nums font-calendar text-sm">
+    <div className="text-standard-text tabular-nums font-calendar text-sm py-3">
       <div className="flex w-full">
         <div className="w-6/10 py-0.5 rounded-lg text-left">
           {`${MONTHS[getMonthIdx(viewingDate)]}  ${viewingDate.getFullYear()}`}
