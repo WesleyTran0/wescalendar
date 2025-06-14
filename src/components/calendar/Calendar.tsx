@@ -1,17 +1,17 @@
+"use client";
 import { ReactElement } from "react";
 import CalendarHeader from "./CalendarHeader";
+// import { useCalendar } from "@context/CalendarContext";
 
 type CalendarProps = {
-  today?: Date;
-  focused?: Date;
   className?: string;
 };
 
 export default function Calendar({
-  today = new Date(),
-  focused = new Date(),
   className = "",
 }: CalendarProps): ReactElement {
+  // const { focusedDate, view } = useCalendar();
+
   return (
     <div className={className}>
       <CalendarHeader />
