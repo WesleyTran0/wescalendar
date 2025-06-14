@@ -1,0 +1,3 @@
+"use client";
+
+type DayColumnProps = {};

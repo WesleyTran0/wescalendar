@@ -8,12 +8,19 @@ import {
   getDayStart,
 } from "@wojtekmaj/date-utils";
 
-import NavBar from "@/components/navbar/Navbar";
+import CalendarContext from "@/contexts/CalendarContext";
+import NavBar from "@components/navbar/Navbar";
+import DetailsBar from "@components/detailsbar/Detailsbar";
+import Calendar from "@/components/calendar/Calendar";
 
 export default function Home() {
   return (
-    <div>
-      <NavBar></NavBar>;
+    <div className="flex h-screen">
+      <CalendarContext>
+        <NavBar />
+        <Calendar className="flex-1 overflow-auto px-1" />
+        <DetailsBar />
+      </CalendarContext>
     </div>
   );
   return (

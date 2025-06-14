@@ -8,14 +8,13 @@ type SidebarProps = {
 
 export default function Sidebar({
   children,
-  width = "w-64",
+  width = "w-55",
   className = "",
 }: SidebarProps) {
   return (
-    <aside
+    <div
       className={`
       ${width} 
-      h-screen 
       bg-white dark:bg-foreground
       overflow-y-auto
       flex flex-col items-center
@@ -23,6 +22,6 @@ export default function Sidebar({
     `}
     >
       {children}
-    </aside>
+    </div>
   );
 }

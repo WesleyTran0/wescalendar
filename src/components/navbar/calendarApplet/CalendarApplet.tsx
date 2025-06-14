@@ -3,16 +3,16 @@
 import { ReactElement, useState } from "react";
 import Image from "next/image";
 import Month from "./Month";
-import { MONTHS, MONTHS_SHORT, offsetDate } from "@/shared/dates";
+import { MONTHS, MONTHS_SHORT } from "@/shared/dates";
 import {
   getMonth as getMonthIdx,
   getMonthHuman,
   getYear,
 } from "@wojtekmaj/date-utils";
 
-type CalendarProps = {};
+type CalendarAppletProps = {};
 
-export default function Calendar({ }: CalendarProps): ReactElement {
+export default function CalendarApplet({ }: CalendarAppletProps): ReactElement {
   const [focusedDate, setFocusedDate] = useState(new Date());
   const [viewingDate, setViewingDate] = useState(new Date());
 
