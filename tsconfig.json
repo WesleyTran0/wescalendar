@@ -38,7 +38,7 @@
       "@public/*": [
         "./public/*"
       ],
-      "@context/*": [
+      "@contexts/*": [
         "./src/contexts/*"
       ]
     }

@@ -47,15 +47,15 @@ export const MONTHS_SHORT = [
 ];
 
 // TODO: do this to be used in Month to create the weeks
-export function getViewWeekRange(date: Date): [Date, Date] {
-  const startDate: Date = getStartOfViewWeek(date);
-  const endDate: Date = getEndOfViewWeek(date);
+export function getWeekRange(date: Date): [Date, Date] {
+  const startDate: Date = getStartOfWeek(date);
+  const endDate: Date = getEndOfWeek(date);
 
   return [startDate, endDate];
 }
 
 /** Returns the first date of viewing week that the given Date is in. */
-function getStartOfViewWeek(date: Date): Date {
+export function getStartOfWeek(date: Date): Date {
   if (date.getDate() != 1 && date.getDate() < 7) {
     const prevMonthEnd = getPreviousMonthEnd(date);
     return offsetDate(prevMonthEnd, -prevMonthEnd.getDay());
@@ -65,7 +65,7 @@ function getStartOfViewWeek(date: Date): Date {
 }
 
 /** Returns the last date of the viewing week that the given Date is in. */
-function getEndOfViewWeek(date: Date): Date {
+function getEndOfWeek(date: Date): Date {
   const monthEnd = getMonthEnd(date).getDate();
 
   if (date.getDate() + 7 > monthEnd) {

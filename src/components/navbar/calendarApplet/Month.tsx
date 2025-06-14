@@ -1,11 +1,7 @@
 "use client";
 import { ReactElement } from "react";
 import Week from "@/components/navbar/calendarApplet/Week";
-import {
-  getNumWeeksInMonth,
-  getViewWeekRange,
-  offsetDate,
-} from "@/shared/dates";
+import { getNumWeeksInMonth, getWeekRange, offsetDate } from "@/shared/dates";
 import { getMonth } from "@wojtekmaj/date-utils";
 
 type MonthProps = {
@@ -30,7 +26,7 @@ export default function Month({
   // const [focusedDate, setFocusedDate] = useContext
 
   const weeksInMonth = Array.from({ length: numWeeks }, (_, i) => {
-    const [startOfCurWeek, endOfCurWeek] = getViewWeekRange(curBaseDay);
+    const [startOfCurWeek, endOfCurWeek] = getWeekRange(curBaseDay);
     const date =
       getMonth(startOfCurWeek) != getMonth(curBaseDay)
         ? curBaseDay
