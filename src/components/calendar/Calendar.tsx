@@ -1,6 +1,7 @@
 "use client";
 import { ReactElement } from "react";
 import CalendarHeader from "./CalendarHeader";
+import WeekView from "./WeekView";
 // import { useCalendar } from "@context/CalendarContext";
 
 type CalendarProps = {
@@ -15,6 +16,7 @@ export default function Calendar({
   return (
     <div className={className}>
       <CalendarHeader />
+      <WeekView />
     </div>
   );
 }

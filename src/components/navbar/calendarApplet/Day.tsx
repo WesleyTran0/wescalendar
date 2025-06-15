@@ -1,12 +1,12 @@
 "use client";
-import { useState, ReactElement } from "react";
+import { useState } from "react";
 import AppletTile from "@components/shared/AppletTile";
 
 type DayProps = {
   date: Date;
 };
 
-export default function Day({ date }: DayProps): ReactElement {
+export default function Day({ date }: DayProps) {
   const [isFocused, setIsFocused] = useState(false);
   const dayNum = date.getDate();
   // const className = isFocused ? "focused-day" : "unfocused-day";

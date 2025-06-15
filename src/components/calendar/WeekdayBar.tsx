@@ -20,13 +20,20 @@ export default function WeekdayBar({ }: WeekdayBarProps) {
   );
 
   return (
-    <div className="w-full text-center flex">
+    <div className="w-full text-center flex border-b border-bg-highlight sticky top-0 z-30 bg-background">
+      <div className="text-xs w-[4%] flex justify-end items-center ">
+        {/* TODO: TIMEZONE HARD CODED RN */}
+        EDT
+      </div>
       {daysInRange.map((day) => (
         <div
           key={day.toISOString() + "_weekdaybar"}
-          className={`w-[${(1 / (numDays + 1)) * 100}%]`}
+          // className={"w-[13.7%]"}
+          // NOTE: Kind of buggy and I'm not sure why since the hardcoded equivalent works and it works after I try the hardcode and switch back
+
+          className={`w-[${(96 / numDays).toFixed(1)}%]`}
         >
-          {day.toLocaleDateString("en-US", { weekday: "short" })}
+          {day.toLocaleDateString("en-US", { weekday: "short" })}{" "}
           {day.getDate()}
         </div>
       ))}

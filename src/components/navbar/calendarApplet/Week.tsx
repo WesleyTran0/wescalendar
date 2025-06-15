@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ReactElement } from "react";
+import { useState } from "react";
 // import { getMonthRange } from "@wojtekmaj/date-utils";
 
 import Day from "@applet/Day";
@@ -14,11 +14,7 @@ type WeekProps = {
   weekEnd: Date;
 };
 
-export default function Week({
-  date,
-  weekStart,
-  weekEnd,
-}: WeekProps): ReactElement {
+export default function Week({ date, weekStart, weekEnd }: WeekProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   const className = isFocused ? "focused_week" : "unfocused_week";
