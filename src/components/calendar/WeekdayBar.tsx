@@ -1,26 +1,29 @@
 "use client";
 import { useCalendar } from "@contexts/CalendarContext";
 import { getStartOfWeek, offsetDate } from "@/shared/dates";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type WeekdayBarProps = {};
 
-export default function WeekdayBar({ }: WeekdayBarProps) {
+export default function WeekdayBar({}: WeekdayBarProps) {
   const { today, focusedDate, setFocusedDate, view, setView } = useCalendar();
 
   // TODO: Make the bar depend on the view, for now it is hard coded for a week for simplicity
   const numDays = 7;
-  const [startOfWeek, setStartOfWeek] = useState(getStartOfWeek(focusedDate));
 
-  const [daysInRange, setDaysInRange] = useState(
-    Array.from({ length: numDays }, (_, i) => {
+  const daysInRange = useMemo(() => {
+    const startOfWeek = getStartOfWeek(focusedDate);
+
+    const newDaysInRange = Array.from({ length: numDays }, (_, i) => {
       let curDay = offsetDate(startOfWeek, i);
       return curDay;
-    }),
-  );
+    });
+
+    return newDaysInRange;
+  }, [focusedDate, numDays]);
 
   return (
-    <div className="w-full text-center flex border-b border-bg-highlight sticky top-0 z-30 bg-background">
+    <div className="w-full text-center text-secondary-text flex border-b border-bg-highlight sticky top-0 z-30 bg-background">
       <div className="text-xs w-[4%] flex justify-end items-center ">
         {/* TODO: TIMEZONE HARD CODED RN */}
         EDT

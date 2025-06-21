@@ -8,7 +8,7 @@ import WeekdayBar from "./WeekdayBar";
 
 type CalenderHeaderProps = {};
 
-export default function CalendarHeader({ }: CalenderHeaderProps) {
+export default function CalendarHeader({}: CalenderHeaderProps) {
   const { focusedDate, setFocusedDate, view, setView } = useCalendar();
   const [monthName, setMonthName] = useState(MONTHS[focusedDate.getMonth()]);
   const [curYear, setCurYear] = useState(focusedDate.getFullYear());
@@ -28,7 +28,7 @@ export default function CalendarHeader({ }: CalenderHeaderProps) {
   }
 
   return (
-    <div className="w-full sticky top-0 z-30">
+    <div className="w-full sticky top-0 z-30 bg-background">
       <div className="h-18 text-standard-text flex justify-end">
         <div className="w-[70%] py-1 px-2 text-xl font-semibold flex flex-col justify-end">
           {monthName} {curYear}
@@ -54,13 +54,7 @@ export default function CalendarHeader({ }: CalenderHeaderProps) {
             width={20}
             height={20}
             onClick={() => {
-              setFocusedDate(
-                new Date(
-                  focusedDate.getFullYear(),
-                  focusedDate.getMonth() + 7,
-                  focusedDate.getDate(),
-                ),
-              );
+              buttonPress(true);
             }}
           />
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import DayCell from "./DayCell";
 
 type DayColumnProps = {
   day: Date;
@@ -16,10 +17,11 @@ export default function DayColumn({ day }: DayColumnProps) {
         {/* NOTE: This is the long column + lines */}
         {Array.from({ length: 24 }, (_, i) => (
           // NOTE: hard coded width/height
-          <div
+          <DayCell
             key={day.toISOString() + "_hour_" + i + "_columnComp"}
-            className={"h-20 border border-bg-highlight"}
-          ></div>
+            day={day}
+            hour={i}
+          />
         ))}
       </div>
       <div>

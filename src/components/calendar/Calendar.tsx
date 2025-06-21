@@ -14,9 +14,11 @@ export default function Calendar({
   // const { focusedDate, view } = useCalendar();
 
   return (
-    <div className={className}>
+    <div className={`flex flex-col ${className}`}>
       <CalendarHeader />
-      <WeekView />
+      <div>
+        <WeekView />
+      </div>
     </div>
   );
 }
