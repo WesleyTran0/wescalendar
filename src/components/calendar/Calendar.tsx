@@ -1,8 +1,6 @@
-"use client";
 import { ReactElement } from "react";
 import CalendarHeader from "./CalendarHeader";
 import WeekView from "./WeekView";
-// import { useCalendar } from "@context/CalendarContext";
 
 type CalendarProps = {
   className?: string;
@@ -11,8 +9,6 @@ type CalendarProps = {
 export default function Calendar({
   className = "",
 }: CalendarProps): ReactElement {
-  // const { focusedDate, view } = useCalendar();
-
   return (
     <div className={`flex flex-col ${className}`}>
       <CalendarHeader />

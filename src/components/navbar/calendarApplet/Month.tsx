@@ -1,29 +1,26 @@
 "use client";
-import { ReactElement } from "react";
 import Week from "@/components/navbar/calendarApplet/Week";
 import { getNumWeeksInMonth, getWeekRange, offsetDate } from "@/shared/dates";
 import { getMonth } from "@wojtekmaj/date-utils";
 
 type MonthProps = {
-  // focusedDate: Date;
   curMonth: number;
   curYear: number;
   className?: string;
-  // what day of the week start
 };
 
 /*
  * Creates a Month using the current Month and Year. The month should be 1 indexed
  */
 export default function Month({
-  // focusedDate,
   curMonth,
   curYear,
   className = "",
-}: MonthProps): ReactElement {
+}: MonthProps) {
   let curBaseDay: Date = new Date(`${curMonth}/01/${curYear}`);
+  // TODO: Currently, the "day" is highlighted since the currentDay is used as the focused date.
+  // When the button is clicked, we should go to another month but the day shouldn't be focused until we click it
   const numWeeks = getNumWeeksInMonth(curBaseDay);
-  // const [focusedDate, setFocusedDate] = useContext
 
   const weeksInMonth = Array.from({ length: numWeeks }, (_, i) => {
     const [startOfCurWeek, endOfCurWeek] = getWeekRange(curBaseDay);

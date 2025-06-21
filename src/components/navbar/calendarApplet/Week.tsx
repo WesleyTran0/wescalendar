@@ -15,17 +15,13 @@ type WeekProps = {
 };
 
 export default function Week({ date, weekStart, weekEnd }: WeekProps) {
-  const [isFocused, setIsFocused] = useState(false);
-
-  const className = isFocused ? "focused_week" : "unfocused_week";
-
   const daysInWeek = Array.from({ length: 7 }, (_, i) => {
     let curDay = offsetDate(weekStart, i);
     return curDay;
   });
 
   return (
-    <div className={`flex ${className}`}>
+    <div className={`flex`}>
       {daysInWeek.map((day) => (
         <Day key={day.toISOString()} date={day} />
       ))}

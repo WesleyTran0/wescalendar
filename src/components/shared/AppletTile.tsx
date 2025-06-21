@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  ButtonHTMLAttributes,
-  createContext,
-  useState,
-  ReactNode,
-} from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 type AppletTileProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -17,16 +12,14 @@ export default function AppletTile({
   className = "",
   onClick,
   ...props
-}: AppletTileProps): ReactNode {
-  const [isPressed, setIsPressed] = useState(false);
-
+}: AppletTileProps) {
   // Tile should be some styled button. This should be consistent for all applets
   return (
     <button
       className={`relative flex items-center justify-center
         w-6.5 h-6.5 rounded-lg ${className}`}
-      onClick={() => {
-        onClick;
+      onClick={(e) => {
+        onClick?.(e);
       }}
       {...props}
     >

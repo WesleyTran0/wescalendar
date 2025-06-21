@@ -9,18 +9,18 @@ import {
   getMonthHuman,
   getYear,
 } from "@wojtekmaj/date-utils";
+import { useCalendar } from "@/contexts/CalendarContext";
 
 type CalendarAppletProps = {};
 
-export default function CalendarApplet({ }: CalendarAppletProps): ReactElement {
-  const [focusedDate, setFocusedDate] = useState(new Date());
-  const [viewingDate, setViewingDate] = useState(new Date());
+export default function CalendarApplet({}: CalendarAppletProps): ReactElement {
+  const { today, focusedDate, setFocusedDate, view, setView } = useCalendar();
 
   return (
     <div className="text-standard-text tabular-nums font-calendar text-sm py-3">
       <div className="flex w-full">
         <div className="w-6/10 py-0.5 rounded-lg text-left">
-          {`${MONTHS[getMonthIdx(viewingDate)]}  ${viewingDate.getFullYear()}`}
+          {`${MONTHS[getMonthIdx(focusedDate)]}  ${focusedDate.getFullYear()}`}
         </div>
         <div className="w-4/10 py-0.5 round-lg flex justify-end text-right items-right space-x-1 p-0.5">
           <Image
@@ -30,11 +30,11 @@ export default function CalendarApplet({ }: CalendarAppletProps): ReactElement {
             width={20}
             height={20}
             onClick={() => {
-              setViewingDate(
+              setFocusedDate(
                 new Date(
-                  viewingDate.getFullYear(),
-                  viewingDate.getMonth() - 1,
-                  viewingDate.getDate(),
+                  focusedDate.getFullYear(),
+                  focusedDate.getMonth() - 1,
+                  focusedDate.getDate(),
                 ),
               );
             }}
@@ -46,11 +46,11 @@ export default function CalendarApplet({ }: CalendarAppletProps): ReactElement {
             width={20}
             height={20}
             onClick={() => {
-              setViewingDate(
+              setFocusedDate(
                 new Date(
-                  viewingDate.getFullYear(),
-                  viewingDate.getMonth() + 1,
-                  viewingDate.getDate(),
+                  focusedDate.getFullYear(),
+                  focusedDate.getMonth() + 1,
+                  focusedDate.getDate(),
                 ),
               );
             }}
@@ -58,10 +58,8 @@ export default function CalendarApplet({ }: CalendarAppletProps): ReactElement {
         </div>
       </div>
       <Month
-        // TODO: Add the highlighting and determine how you want to pass donw that information. Through context or parameter?
-        // focusedDate={focusedDate}
-        curMonth={getMonthHuman(viewingDate)}
-        curYear={getYear(viewingDate)}
+        curMonth={getMonthHuman(focusedDate)}
+        curYear={getYear(focusedDate)}
       />
     </div>
   );
