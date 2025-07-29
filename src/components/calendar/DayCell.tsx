@@ -26,7 +26,7 @@ const createTask = async () => {
 export default function DayCell({ day, hour }: DayCellProps) {
   return (
     <div
-      className={"h-20 border border-bg-highlight"}
+      className={"h-20 border border-bg-highlight text-white"}
       // onClick={() => console.log(day.toDateString())}
       onClick={createTask}
     >

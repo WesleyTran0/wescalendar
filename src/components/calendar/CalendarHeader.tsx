@@ -27,6 +27,35 @@ export default function CalendarHeader({}: CalenderHeaderProps) {
     setCurYear(offsettedByMonth.getFullYear());
   }
 
+  const createUser = async () => {
+    const registrationData = {
+      username: "test dummy",
+      password: "Password1234!",
+      email: "testing@wescal.com",
+    };
+    try {
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registrationData),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Registration failed");
+      }
+      const result = await response.json();
+      console.log("User returned: ", result);
+      return result;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
   return (
     <div className="w-full sticky top-0 z-30 bg-background">
       <div className="h-18 text-standard-text flex justify-end">
@@ -34,7 +63,8 @@ export default function CalendarHeader({}: CalenderHeaderProps) {
           {monthName} {curYear}
         </div>
         <div className="w-[30%] py-3 px-2 round-lg flex justify-end text-right items-start items-right">
-          {/* TODO: Add a dropdown menu before these buttons */}
+          {/* WARN: Bug with the arrows. Probably to do with math. Check July 2025 -> August 2025. 
+              Bug occurred on 7/29 when clicking buttons the week didn't change but the month name did*/}
 
           {/* NOTE: Hard coded to only change the current week. Later change to change the day based on the view */}
           <Image
@@ -57,6 +87,11 @@ export default function CalendarHeader({}: CalenderHeaderProps) {
               buttonPress(true);
             }}
           />
+
+          {/* TODO: Add a dropdown menu instead of a log in/register button */}
+          <button className="px-1 border border-white" onClick={createUser}>
+            Register
+          </button>
         </div>
       </div>
       <div className="text-secondary-text">
