@@ -5,10 +5,11 @@ import { useCalendar } from "@contexts/CalendarContext";
 import { MONTHS } from "@/shared/dates";
 import { useState } from "react";
 import WeekdayBar from "./WeekdayBar";
+import Dropdown from "../shared/dropdown/Dropdown";
 
 type CalenderHeaderProps = {};
 
-export default function CalendarHeader({}: CalenderHeaderProps) {
+export default function CalendarHeader({ }: CalenderHeaderProps) {
   const { focusedDate, setFocusedDate, view, setView } = useCalendar();
   const [monthName, setMonthName] = useState(MONTHS[focusedDate.getMonth()]);
   const [curYear, setCurYear] = useState(focusedDate.getFullYear());
@@ -37,7 +38,7 @@ export default function CalendarHeader({}: CalenderHeaderProps) {
       const response = await fetch("http://localhost:8080/api/users/register", {
         method: "POST",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(registrationData),
@@ -66,6 +67,33 @@ export default function CalendarHeader({}: CalenderHeaderProps) {
           {/* WARN: Bug with the arrows. Probably to do with math. Check July 2025 -> August 2025. 
               Bug occurred on 7/29 when clicking buttons the week didn't change but the month name did*/}
 
+          {/* TODO: Add a dropdown menu instead of a log in/register button */}
+
+          <Dropdown displayText="Register" className="px-1 border border-white">
+            <div className="flex flex-col gap-2">
+              <input
+                type="text"
+                name="username"
+                placeholder="username"
+                className="border border-background rounded focus:outline-none"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                className="border border-background focus:outline-none"
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                className="border border-background focus:outline-none"
+              />
+              <div className="py-0.0 ">
+                <button className="flex rounded ">Submit</button>
+              </div>
+            </div>
+          </Dropdown>
           {/* NOTE: Hard coded to only change the current week. Later change to change the day based on the view */}
           <Image
             className="fill-gray-300 rotate-180"
@@ -87,11 +115,6 @@ export default function CalendarHeader({}: CalenderHeaderProps) {
               buttonPress(true);
             }}
           />
-
-          {/* TODO: Add a dropdown menu instead of a log in/register button */}
-          <button className="px-1 border border-white" onClick={createUser}>
-            Register
-          </button>
         </div>
       </div>
       <div className="text-secondary-text">
